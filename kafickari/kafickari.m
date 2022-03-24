@@ -38,7 +38,7 @@ for i=1:length(S)
 end
 
 
-tracker = vision.PointTracker('NumPyramidLevels',15 ,  'MaxBidirectionalError', 5, 'BlockSize', [61 61], 'MaxIterations', 20 );
+tracker = vision.PointTracker('NumPyramidLevels',10 ,  'MaxBidirectionalError', 6, 'BlockSize', [51 51], 'MaxIterations', 15 );
 %points = detectMinEigenFeatures(im2gray(obr{1}));
 initialize(tracker,matica, obr{1});
 trajectories = cell(1, 6);
