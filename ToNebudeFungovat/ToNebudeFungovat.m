@@ -1,11 +1,11 @@
 function trajectories = ToNebudeFungovat(cesta) 
 
-cesta = cesta + "\*.jpg";
+cesta_pom = cesta + "\*.jpg";
 
-files = dir(cesta);
+files = dir(cesta_pom);
 n = length(files);  
 for i=1:n
-   soubor = files(i).name;
+   soubor = [cesta '\' files(i).name];
    obr = imread(soubor);
    mravenci_all{i} = obr;
 end
@@ -38,7 +38,7 @@ for k=2:n
     end
 end
 
-%[errorTracking] = EvaluationAnts (trajectories)
+% [errorTracking] = EvaluationAnts (trajectories)
 
 end
 %% trajektorie
