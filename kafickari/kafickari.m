@@ -3,7 +3,6 @@ function [trajectories] = kafickari(path_directory)
 %   Detailed explanation goes here
 original_files=dir([path_directory '/*.jpg']); 
  obr = {};
- ants = cell(1,6);
 
  
  for k=1:length(original_files)
@@ -18,14 +17,13 @@ original_files=dir([path_directory '/*.jpg']);
  pom = obr{1};
  imshow(pom,[])
  pom = im2double(rgb2gray(pom));
- imshow(pom,[])
 
 A_otsu_thresh = zeros(size(pom));
 A_otsu_thresh(pom<0.25) = 1;
 imshow(A_otsu_thresh);
 Ierod = imerode(A_otsu_thresh, strel('diamond',3));
 Ierod = imdilate(Ierod, strel('diamond',2));
-imshow(Ierod,[])
+Ierod = bwareafilt(logical(Ierod),6);
 %%
 
 % s = regionprops(Ierod,'centroid');
@@ -82,15 +80,15 @@ for i = 1:length(original_files)
 
     end
 
-    for ans = 1:6
-        if isempty(trajectories{ans})
-            trajectories{ans} = points(ans,:);
+    for ants = 1:6
+        if isempty(trajectories{ants})
+            trajectories{ants} = points(ants,:);
         else
-            pomocna = trajectories{ans};
-            [~,ind] = min(sum(abs(repmat(pomocna(end,:),7-ans,1) - points),2));
+            pomocna = trajectories{ants};
+            [~,ind] = min(sum(abs(repmat(pomocna(end,:),7-ants,1) - points),2));
             pomocna(end+1,:) = points(ind,:);
             points(ind,:) = [];
-            trajectories{ans} = pomocna;
+            trajectories{ants} = pomocna;
         end
 
     end
