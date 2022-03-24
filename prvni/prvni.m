@@ -77,20 +77,7 @@ for i = 2:length(img_paths)
         trajectories{k}(i,:) = centroids(I(k),:);
     end 
     
-%     if length(centroids)<6
-%         disp(i)
-%     end
-%     if sum(I)<21
-%         disp(i)
-%     end
 
-    if (102<i) && (i<103)
-        figure
-        imshow(BW3)
-        hold on
-        plot(centroids(:,1),centroids(:,2), 'r+','MarkerSize',10)
-        hold off
-    end
 end
 
 
