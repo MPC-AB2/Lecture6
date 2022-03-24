@@ -15,12 +15,11 @@ original_files=dir([path_directory '/*.jpg']);
  %%
 
  pom = obr{1};
- imshow(pom,[])
  pom = im2double(rgb2gray(pom));
 
 A_otsu_thresh = zeros(size(pom));
 A_otsu_thresh(pom<0.25) = 1;
-imshow(A_otsu_thresh);
+% imshow(A_otsu_thresh);
 Ierod = imerode(A_otsu_thresh, strel('diamond',3));
 Ierod = imdilate(Ierod, strel('diamond',2));
 Ierod = bwareafilt(logical(Ierod),6);
@@ -39,7 +38,7 @@ for i=1:length(S)
 end
 
 
-tracker = vision.PointTracker('NumPyramidLevels',15 ,  'MaxBidirectionalError', 3, 'BlockSize', [81 81], 'MaxIterations', 50 );
+tracker = vision.PointTracker('NumPyramidLevels',15 ,  'MaxBidirectionalError', 5, 'BlockSize', [61 61], 'MaxIterations', 20 );
 %points = detectMinEigenFeatures(im2gray(obr{1}));
 initialize(tracker,matica, obr{1});
 trajectories = cell(1, 6);
@@ -72,7 +71,7 @@ for i = 1:length(original_files)
     end
 
     if((sum(validity) < 6) || (length(points) < 6))
-        print('oprava')
+%         print('oprava')
         setPoints(tracker,matica)
         [points,validity] = tracker(obr{i});
 
@@ -92,6 +91,9 @@ for i = 1:length(original_files)
         end
 
     end
+%     hilfe = trajectories()
+%     out = insertMarker(obr{i},trajectories(:, :),'+');
+%     imshow(out)
 
 end
 
