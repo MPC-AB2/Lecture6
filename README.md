@@ -1,5 +1,7 @@
 # Lecture6 - OBJECT TRACKING
 
+[**Benchmark Results**](https://moodle.vut.cz/pluginfile.php/410380/mod_resource/content/1/L6_BenchmarkTracking.xlsx%20-%20List1.pdf)
+
 ## Preparation
 
 1. Run Git bash.
